@@ -378,7 +378,7 @@ class ColaProcessor(DataProcessor):
     return examples, labels, labels_test
 
 
-def convert_single_example(ex_index, example, label_map, max_seq_length,
+def convert_single_example(ex_index, example, label_list, max_seq_length,
                            tokenizer):
   """Converts a single `InputExample` into a single `InputFeatures`."""
 
@@ -390,9 +390,9 @@ def convert_single_example(ex_index, example, label_map, max_seq_length,
         label_id=0,
         is_real_example=False)
 
-#   label_map = {}
-#   for (i, label) in enumerate(label_list):
-#     label_map[label] = i
+  label_map = {}
+  for (i, label) in enumerate(label_list):
+    label_map[label] = i
 
   tokens_a = tokenizer.tokenize(example.text_a)
   tokens_b = None
