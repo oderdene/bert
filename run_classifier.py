@@ -818,8 +818,6 @@ def main(_):
 
   processor = processors[task_name]()
 
-  label_list = processor.get_labels()
-
   tokenizer = tokenization.FullTokenizer(
       vocab_file=FLAGS.vocab_file, do_lower_case=FLAGS.do_lower_case)
 
@@ -848,6 +846,8 @@ def main(_):
     num_train_steps = int(
         len(train_examples) / FLAGS.train_batch_size * FLAGS.num_train_epochs)
     num_warmup_steps = int(num_train_steps * FLAGS.warmup_proportion)
+    
+  label_list = processor.get_labels(train_labels)
 
   model_fn = model_fn_builder(
       bert_config=bert_config,
