@@ -366,7 +366,7 @@ class ColaProcessor(DataProcessor):
             continue
         guid = "%s-%s" % (set_type, i)
         text_a = tokenization.convert_to_unicode(line[0])
-        text_b = tokenization.convert_to_unicode(line[1])
+        label = tokenization.convert_to_unicode(line[1])
         labels.append(label)
 
         if set_type == "test":
