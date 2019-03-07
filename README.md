@@ -1,5 +1,31 @@
 # BERT
 
+colab
+```
+!rm glue_data/CoLA/dev.tsv
+!rm glue_data/CoLA/train.tsv
+!rm glue_data/CoLA/test.tsv
+
+!cp bert_repo/dev.tsv glue_data/CoLA/
+!cp bert_repo/train.tsv glue_data/CoLA/
+!cp bert_repo/test.tsv glue_data/CoLA/
+
+train_examples, train_labels, temp = processor.get_train_examples(TASK_DATA_DIR)
+label_list = processor.get_labels(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'Z'])
+num_train_steps = int(
+    len(train_examples) / TRAIN_BATCH_SIZE * NUM_TRAIN_EPOCHS)
+num_warmup_steps = int(num_train_steps * WARMUP_PROPORTION)
+
+
+eval_examples, eval_labels, temp = processor.get_dev_examples(TASK_DATA_DIR)
+# print(temp)
+# for (ex_index, example) in enumerate(eval_examples):
+#     print(example.text_a)
+    
+eval_features = run_classifier.convert_examples_to_features(
+    eval_examples, eval_labels, MAX_SEQ_LENGTH, tokenizer)
+```
+
 **\*\*\*\*\* New November 23rd, 2018: Un-normalized multilingual model + Thai +
 Mongolian \*\*\*\*\***
 
